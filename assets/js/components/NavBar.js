@@ -9,13 +9,13 @@ const UserInfo = ({ firstName, lastName, email, examTaken }) => {
     return (
         <div className="pt-4">
             <div className='d-flex justify-content-center'>
-                <img src="/images/adedeji.png" alt={ firstName } className="user-avatar"/>
+                <img src="/images/user.png" alt={ firstName } className="user-avatar bg-white"/>
             </div>
             <div className="text-center user--details pt-2">
                 <h5 className="font-weight-bold mb-0">
                     { `${firstName} ${lastName}` }
                 </h5>
-                <small>{ email } <br/> { examTaken } Exams taken</small>
+                <small>{ email } | {examTaken} { (examTaken<=1) ? 'exam' : 'exams' } taken</small>
             </div>
         </div>
     );
@@ -26,7 +26,7 @@ const UserInfo = ({ firstName, lastName, email, examTaken }) => {
 * screens.
 * */
 const NavBar = ({ user }) => {
-    const { email, firstName, lastName, examTaken } = user;
+    const { email, firstName, lastName, examTaken, isAdmin } = user;
     return (
         <React.Fragment>
             <nav className="navbar navbar-light navbar--none">
@@ -63,6 +63,16 @@ const NavBar = ({ user }) => {
                         <div className="sidebar__padded sidebar__divider">
                         </div>
                     </div>
+                    {
+                        (isAdmin === true) &&
+                        <div className='mt-0'>
+                            <ul className="sidebar__list">
+                                <li>
+                                    <a href="/manage">Admin</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                     <div>
                         <ul className="sidebar__list">
                             <li><a href="#" data-toggle="modal" data-target="#logout-modal">Logout</a></li>

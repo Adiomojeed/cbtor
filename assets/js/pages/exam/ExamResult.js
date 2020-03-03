@@ -25,7 +25,7 @@ const TotalScore = ({ total, score }) => {
                 { score }/{ total }
             </h5>
             <p className="small mb-1">
-                Check the summery of what you got right and wrong.
+                Check the summary of the options you got right or wrong.
             </p>
             <a href="/dashboard" className="btn btn-primary">Return to Dashboard</a>
         </div>
@@ -69,12 +69,12 @@ const Question = ({ index, question, answer }) => {
     );
 };
 
-const ExamResult = ({ questions, answers }) => {
+const ExamResult = ({ questions, answers, course }) => {
     const score = gradeExam(questions, answers),
           total = questions.length
 
-    syncResult('/api/sync-result', {score, total})
-            .then(res => console.log(res))
+    syncResult('/api/sync-result', {score, total, course})
+            .then(() => {})
             .catch(/* do nothing */)
     
     return (
